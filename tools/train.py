@@ -28,7 +28,8 @@ def main(config):
     from utils import get_metric
     if torch.cuda.device_count() > 1:
         torch.cuda.set_device(args.local_rank)
-        torch.distributed.init_process_group(backend="nccl", init_method="env://", world_size=torch.cuda.device_count(), rank=args.local_rank)
+        torch.distributed.init_process_group(backend="nccl", init_method="env://", world_size=torch.cuda.device_count(),
+                                             rank=args.local_rank)
         config['distributed'] = True
     else:
         config['distributed'] = False
@@ -43,7 +44,8 @@ def main(config):
 
     criterion = build_loss(config['loss']).cuda()
 
-    config['arch']['backbone']['in_channels'] = 3 if config['dataset']['train']['dataset']['args']['img_mode'] != 'GRAY' else 1
+    config['arch']['backbone']['in_channels'] = 3 if config['dataset']['train']['dataset']['args'][
+                                                         'img_mode'] != 'GRAY' else 1
     model = build_model(config['arch'])
 
     post_p = get_post_processing(config['post_processing'])
@@ -62,6 +64,7 @@ def main(config):
 if __name__ == '__main__':
     import sys
     import pathlib
+
     __dir__ = pathlib.Path(os.path.abspath(__file__))
     sys.path.append(str(__dir__))
     sys.path.append(str(__dir__.parent.parent))

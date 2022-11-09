@@ -9,7 +9,7 @@ import scipy.io as sio
 from tqdm.auto import tqdm
 
 from base import BaseDataSet
-from utils import order_points_clockwise, get_datalist, load,expand_polygon
+from utils import order_points_clockwise, get_datalist, load, expand_polygon
 
 
 class ICDAR2015Dataset(BaseDataSet):
